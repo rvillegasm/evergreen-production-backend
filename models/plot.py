@@ -9,7 +9,36 @@ class Plot(db.Model):
     available = db.Column(db.Boolean, nullable=False)
     num_workers = db.Column(db.Integer, nullable=False)
 
+    def to_json(self):
+        return {
+            'id': self.id,
+            'area': self.area,
+            'lat': self.lat,
+            'lng': self.lng,
+            'state': self.state,
+            'available': self.available,
+            'num_workers': self.num_workers
+        }
+
     def __repr__(self):
         return f'<Plot {self.id}>'
   
-  
+    def insert(area, lat, lng, state, available, num_workers):
+        plot = Plot(
+            area=area,
+            lat=lat,
+            lng=lng,
+            state=state,
+            available=available,
+            num_workers=num_workers
+        )
+
+        db.session.add(plot)
+        db.session.commit()
+        return plot
+
+    def get_all():
+        return Plot.query.all()
+
+    def get_by_id(id):
+        return Plot.query.filter_by(id=str(id)).first()
