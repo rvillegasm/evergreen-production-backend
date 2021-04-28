@@ -1,6 +1,6 @@
 from server_config import db
 
-class PlotModel(db.Model):
+class Plot(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     area = db.Column(db.Float, nullable=False)
     lat = db.Column(db.Float, nullable=False)
@@ -11,3 +11,5 @@ class PlotModel(db.Model):
 
     def __repr__(self):
         return f'<Plot {self.id}>'
+  
+  
