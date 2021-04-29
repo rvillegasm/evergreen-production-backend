@@ -9,6 +9,10 @@ class Plot(db.Model):
     available = db.Column(db.Boolean, nullable=False)
     num_workers = db.Column(db.Integer, nullable=False)
 
+    def mark_as_used(self):
+        self.available = False
+        db.session.commit()
+
     def to_json(self):
         return {
             'id': self.id,

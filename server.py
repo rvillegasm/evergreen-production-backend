@@ -45,4 +45,8 @@ def retrieve_all_crops():
             request_data['supervisor'],
             request_data['plot_id']
         )
+
+        plot = Plot.get_by_id(request_data['plot_id'])
+        plot.mark_as_used()
+
         return crop.to_json()
